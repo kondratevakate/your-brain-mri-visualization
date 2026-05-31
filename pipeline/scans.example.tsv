@@ -1,0 +1,11 @@
+# id	relpath_under_01_my_brain_years
+# --- Path A: cross-vendor longitudinal T1 ---
+2018_ge_fspgr	images/2018/nifti/3_fspgr_bravo_10mm_ax.nii.gz
+2024_phi_3di	images/2024/nifti/901_3di_mc_hr.nii.gz
+2022_sie_t1se	images/2022/nifti/4_t1_se_sag.nii.gz
+# --- Path A+: 2024 multi-contrast within-session ---
+2024_phi_t1ffe_ax	images/2024/nifti/401_t1w_ffe.nii.gz
+2024_phi_t1ffe_sag	images/2024/nifti/601_t1w_ffe.nii.gz
+2024_phi_flair	images/2024/nifti/301_t2w_flair.nii.gz
+2024_phi_t2tse_ax	images/2024/nifti/501_t2w_tse.nii.gz
+2024_phi_t2tse_cor	images/2024/nifti/801_t2w_tse.nii.gz
