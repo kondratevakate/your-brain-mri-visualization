@@ -3,28 +3,30 @@
 Turn your own brain MRI into 3D models you can spin around (or 3D-print) in
 **Blender** — and *quality-check* the segmentation before you trust it.
 
-Run a FreeSurfer / FastSurfer / SynthSeg segmentation → export the structures you
-care about as `.stl` meshes → render. The `tools/` folder also has small scripts
-to verify the numbers and measure how reproducible they are.
-
-![viz](https://github.com/kondratevakate/your-brain-mri-visualization/blob/master/viz/aseg_nd_aparc.png)
+![viz](https://github.com/kondratevakate/your-brain-mri-visualization/blob/master/gallery/aseg_nd_aparc.png)
 
 > **Privacy first.** Everything tracked here is *surface meshes* and *label
 > volumes* — no skin, skull, or facial features, nothing face-reconstructable.
 > Never commit a raw whole-head T1 (it can be used to reconstruct a face); deface
 > first with `mri_deface` / `pydeface`.
 
-## What's inside
+## How to use — 3 steps
 
-```
-tools/             all scripts: segment, verify, mesh, report  (start here)
-examples/          a canonical FreeSurfer output to try the pipeline on
-my-brain-models/   provenance for the demo subject (meshes live in Releases)
-viz/               rendered example image
-```
-Mesh binaries (`.stl`) are in the
-[**Releases**](https://github.com/kondratevakate/your-brain-mri-visualization/releases),
-not in git (they bloat history and pack poorly).
+1. **Segment** your T1 → `scripts/run_synthseg.sh` (or `run_fastsurfer.sh`)
+2. **Check & mesh** → `scripts/verify_volumes.py` to confirm the numbers, then
+   binarize a structure and `scripts/stl_files_creation.sh` to make `.stl`
+3. **Render** the `.stl` in Blender (`File → Import → STL`)
+
+Try it on the sample in `example_data/` before using your own scan.
+
+## Repository layout
+
+| Folder | What's in it |
+|---|---|
+| **`scripts/`** | Everything you run: segment (`run_synthseg.sh`, `run_fastsurfer.sh`), quality-check (`verify_volumes.py`, `symmetry_test.py`, `qc_report.py`), and mesh/convert (`stl_files_creation.sh`, `save_nii_named.sh`, `freesurfer_stats_to_csv.py`). See [`scripts/README.md`](scripts/README.md). |
+| **`example_data/`** | A canonical FreeSurfer output (`aparc+aseg.nii.gz` + `aseg.stats` + color tables) so you can try the pipeline without your own recon. |
+| **`gallery/`** | Rendered example image(s). |
+| **Releases** | The `.stl` mesh binaries — [download here](https://github.com/kondratevakate/your-brain-mri-visualization/releases). They're kept out of git (they bloat history). |
 
 ## Quickstart
 
@@ -33,25 +35,30 @@ export DATA=/path/to/data_root              # mounted as /data in Docker
 export FS_LICENSE_FILE=/path/to/license.txt # free FreeSurfer license
 
 # 1. segment a T1 (contrast/resolution-agnostic; handles 5 mm or 0.5 mm scans)
-bash tools/run_synthseg.sh sub/t1.nii.gz mybrain
+bash scripts/run_synthseg.sh sub/t1.nii.gz mybrain
 
 # 2. check the numbers are self-consistent (catches unit / L-R bugs)
-python tools/verify_volumes.py "$DATA/synthseg/seg_mybrain.nii.gz" "$DATA/synthseg/vol_mybrain.csv"
+python scripts/verify_volumes.py "$DATA/synthseg/seg_mybrain.nii.gz" "$DATA/synthseg/vol_mybrain.csv"
 
 # 3. binarize a structure group and mesh it
 mri_binarize --i "$DATA/synthseg/seg_mybrain.nii.gz" \
   --match 17 53 18 54 10 49 11 50 12 51 13 52 --o subcortical_bin.nii.gz
-bash tools/stl_files_creation.sh /folder/with/bin_niftis    # -> .stl
+bash scripts/stl_files_creation.sh /folder/with/bin_niftis    # -> .stl
 
-# 4. import the .stl into Blender (File -> Import -> STL), render.
+# 4. import the .stl into Blender, render.
 ```
-Full tool list and the FreeSurfer/FastSurfer gotchas we hit are in
-[`tools/README.md`](tools/README.md).
 
 ## How reproducible is this — on one real brain (n=1)?
 
 These scripts were built while reprocessing **one person's brain across three
-scanners over six years** (GE 3T 2018, Siemens 1.5T 2022, Philips 1.5T 2024).
+scanners over six years**:
+
+| Session | Scanner | Field | Native res |
+|---|---|---|---|
+| 2018 | GE Signa HDxt | 3.0 T | 1.0 mm |
+| 2022 | Siemens Symphony | 1.5 T | 5.0 mm |
+| 2024 | Philips Achieva | 1.5 T | 0.5 mm |
+
 There is no in-vivo ground truth, so these are *reproducibility / agreement*
 numbers (SynthSeg subcortical volumes), not accuracy-vs-truth:
 
@@ -63,11 +70,17 @@ numbers (SynthSeg subcortical volumes), not accuracy-vs-truth:
 | Cross-pipeline (SynthSeg vs FastSurfer, 2018) | same scan, two tools | hippocampus/thalamus 1–8%, amygdala ~15%, pallidum ~20% |
 | Surface QC (FastSurfer full, 2018) | topological defect holes | 45 holes (clean), cortical thickness 2.50/2.52 mm, eTIV 1380 mL |
 
-**Takeaway:** the pipeline itself is stable (~1–2% floor), but the *scanner*
-moves small subcortical volumes by 10–45%. Big structures (thalamus ~3–5%) are
-robust; small, low-contrast ones (amygdala, pallidum) are where scanner choice
-dominates — so a single-scanner longitudinal design matters. Numbers come from
-`tools/qc_report.py` and `tools/symmetry_test.py`.
+**Takeaway:** the pipeline itself is stable (~1–2% floor), but the *scanner* moves
+small subcortical volumes by 10–45%. Big structures (thalamus ~3–5%) are robust;
+small, low-contrast ones (amygdala, pallidum) are where scanner choice dominates —
+so a single-scanner longitudinal design matters. Numbers come from
+`scripts/qc_report.py` and `scripts/symmetry_test.py`.
+
+The same-brain-three-scanners meshes are in the
+[`kate-3scanners-2026` release](https://github.com/kondratevakate/your-brain-mri-visualization/releases) —
+overlay the three subcortical models in Blender to see the differences. Companion
+to *Benchmarking the Reproducibility of Brain Tissue Segmentation Across MRI
+Scanners* (MIDL 2026).
 
 ## Requirements
 - **FreeSurfer 7.4+** or **FastSurfer** (recon + `mri_binarize` / `mri_tessellate` / `mris_convert`).
@@ -78,12 +91,6 @@ dominates — so a single-scanner longitudinal design matters. Numbers come from
 Subcortical FreeSurfer label IDs: hippocampus 17/53, amygdala 18/54, thalamus
 10/49, caudate 11/50, putamen 12/51, pallidum 13/52. Full list:
 `$FREESURFER_HOME/FreeSurferColorLUT.txt`.
-
-## Example: one brain, three scanners (MIDL 2026)
-The `kate-3scanners-2026` release set is the *same* brain segmented from GE 3T,
-Siemens 1.5T, and Philips 1.5T scans — overlay the three subcortical meshes in
-Blender to see scanner-driven differences. Companion to *Benchmarking the
-Reproducibility of Brain Tissue Segmentation Across MRI Scanners*.
 
 Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). MIT licensed.
 

@@ -43,16 +43,16 @@ bash run_synthseg.sh sub/ses1/t1.nii.gz ses1
 bash run_synthseg.sh sub/ses2/t1.nii.gz ses2
 
 # 2. confirm each result is internally consistent
-python tools/verify_volumes.py "$DATA/synthseg/seg_ses1.nii.gz" "$DATA/synthseg/vol_ses1.csv"
+python scripts/verify_volumes.py "$DATA/synthseg/seg_ses1.nii.gz" "$DATA/synthseg/vol_ses1.csv"
 
 # 3. measure the processing-noise floor on one scan
-python tools/symmetry_test.py sub/ses1/t1.nii.gz "$DATA/sym"
+python scripts/symmetry_test.py sub/ses1/t1.nii.gz "$DATA/sym"
 bash run_synthseg.sh sym/t1_rotpos.nii.gz rotpos
 bash run_synthseg.sh sym/t1_rotneg.nii.gz rotneg
 
 # 4. compare spread vs floor
-python tools/qc_report.py ses1="$DATA/synthseg/vol_ses1.csv" ses2="$DATA/synthseg/vol_ses2.csv"
-python tools/qc_report.py rotpos="$DATA/synthseg/vol_rotpos.csv" rotneg="$DATA/synthseg/vol_rotneg.csv"
+python scripts/qc_report.py ses1="$DATA/synthseg/vol_ses1.csv" ses2="$DATA/synthseg/vol_ses2.csv"
+python scripts/qc_report.py rotpos="$DATA/synthseg/vol_rotpos.csv" rotneg="$DATA/synthseg/vol_rotneg.csv"
 ```
 If the cross-scan spread (step 4a) is much larger than the rotation floor
 (step 4b), the differences you see are real, not processing noise.
