@@ -1,5 +1,8 @@
 # Kate's brain — 3 scanners, one pipeline (2026)
 
+> The `.stl` meshes are in the [`models-2026` release](https://github.com/kondratevakate/your-brain-mri-visualization/releases/tag/models-2026)
+> (`kate-3scanners-2026.zip`), not in git. This folder keeps only provenance.
+
 Derived 3D models for the MIDL 2026 "my brain, 3 scanners, 6 years" demonstration
 (companion to *Benchmarking the Reproducibility of Brain Tissue Segmentation
 Across MRI Scanners*). Single subject (n=1, self).
