@@ -19,6 +19,14 @@ Docker images used: `freesurfer/freesurfer:8.0.0` (SynthSeg), `deepmi/fastsurfer
 | `run_synthseg.sh <t1_rel> <id>` | SynthSeg — contrast/resolution-agnostic, handles 5 mm or 0.5 mm or odd contrasts. Outputs label map + volumes (mm³) + native QC scores. |
 | `run_fastsurfer.sh <t1_rel> <sid> [seg\|full]` | FastSurfer. `seg` = fast VINN volumes (no license). `full` = + surfaces → cortical thickness + Euler number (needs license, hours). |
 
+## Mesh & convert
+
+| Script | What |
+|---|---|
+| `save_nii_named.sh <SUBJECTS_DIR>` | Convert each subject's `norm.mgz` / `aparc+aseg.mgz` to named NIfTI. |
+| `stl_files_creation.sh <folder_of_bin_niftis>` | `mri_tessellate` + `mris_convert` each binarized volume to `.stl`. |
+| `freesurfer_stats_to_csv.py` | Pull region volumes out of a FreeSurfer `aseg.stats` into CSV. |
+
 ## Quality checks (the point of this folder)
 
 | Script | Question it answers |
