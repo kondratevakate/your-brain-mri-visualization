@@ -34,6 +34,9 @@ Docker images used: `freesurfer/freesurfer:8.0.0` (SynthSeg), `deepmi/fastsurfer
 | `verify_volumes.py <seg> <vol.csv>` | "Are these volumes even self-consistent?" Re-derives every volume by counting voxels in the label map and comparing to the CSV — catches mm³-vs-mL bugs and L/R column swaps that pass silently. |
 | `symmetry_test.py <T1> <out_dir> [theta]` | "How much of my variability is just the pipeline?" Makes two identically-interpolated rotated copies of one scan; segment both → their spread is the **method-variance floor**. |
 | `qc_report.py a=vol_a.csv b=vol_b.csv ...` | "How much do the numbers move across scans, and does asymmetry stay stable?" CV%, range/min, and a left/right asymmetry index per scan (watch for **sign flips**). |
+| `decompose_floor.py <seg_orig> <seg_rotpos> <seg_rotneg>` | "Is the rotation floor physics or model weakness?" Splits the floor into interpolation (rotate the label map, no model re-run) vs model instability. A non-equivariant network shows ~all model, ~no physics (pilot: 1.36% model vs 0.05% physics). |
+| `tta_sweep_report.py <vol_dir>` | "What does the full orientation response look like?" CV%, TTA-corrected volume (mean over angles), symmetry of the response across a multi-angle sweep. |
+| `cross_method_corr.py --a-orig .. --a-pert .. --b-orig .. --b-pert ..` | "Do two segmenters fail the same way?" Correlation of their response to the same perturbation. Near-zero r = independent errors → combine Δ% only, never absolute volumes (systematic offset). |
 | (built into SynthSeg) | `qc_*.csv` holds native QC scores 0–1; flag any structure < 0.65. |
 
 ### Typical workflow
