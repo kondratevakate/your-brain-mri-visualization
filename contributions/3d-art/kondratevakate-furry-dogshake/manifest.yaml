@@ -1,0 +1,22 @@
+title: "Furry Brain Dog-Shake (pink)"
+author: "kondratevakate"
+type: animation
+engine: cycles
+entry: build.py
+output: furry_dogshake.gif
+preview: thumbnail.png
+data:
+  brain: example_data/aparc+aseg.nii.gz
+  tracts: null
+style:
+  preset: null
+  params:
+    layers: 2
+    undercoat: "dark, short (7mm), stiff"
+    topcoat: "pink, long (26mm), soft"
+    shake_deg: 26
+    n_shakes: 3
+    whip_deg: 95
+    zeta: 0.085
+license: CC-BY-4.0
+created: "2026-06-01"

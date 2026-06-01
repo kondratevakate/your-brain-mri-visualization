@@ -1,6 +1,6 @@
 # Gallery
 
-5 community contribution(s) across 3 categor(ies). Add yours — see [CONTRIBUTING.md](../CONTRIBUTING.md).
+6 community contribution(s) across 3 categor(ies). Add yours — see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## 📊 Reports
 
@@ -23,6 +23,7 @@
 
 <table>
 <tr>
+<td align='center' width='33%'><img src='../contributions/3d-art/kondratevakate-furry-dogshake/thumbnail.png' width='240'><br><b>Furry Brain Dog-Shake (pink)</b><br><sub>@kondratevakate · animation</sub></td>
 <td align='center' width='33%'><img src='../contributions/3d-art/kondratevakate-pin-brain/thumbnail.png' width='240'><br><b>Radial Pin Brain</b><br><sub>@kondratevakate · figure</sub></td>
 <td align='center' width='33%'><img src='../contributions/3d-art/kondratevakate-pin-whip/thumbnail.png' width='240'><br><b>Pin-Whip Brain (animation)</b><br><sub>@kondratevakate · animation</sub></td>
 </tr>
