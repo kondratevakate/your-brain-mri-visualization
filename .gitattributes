@@ -1,2 +1,30 @@
 *.sh text eol=lf
 *.py text eol=lf
+
+# ----------------------------------------------------------------------------
+# Git LFS — large binary assets live here, not in git history.
+# Install once:  git lfs install
+# Then normal add/commit/push handles these via LFS automatically.
+# ----------------------------------------------------------------------------
+
+# Meshes
+*.stl   filter=lfs diff=lfs merge=lfs -text
+*.ply   filter=lfs diff=lfs merge=lfs -text
+*.obj   filter=lfs diff=lfs merge=lfs -text
+*.glb   filter=lfs diff=lfs merge=lfs -text
+*.gltf  filter=lfs diff=lfs merge=lfs -text
+
+# Tractography
+*.trk   filter=lfs diff=lfs merge=lfs -text
+*.tck   filter=lfs diff=lfs merge=lfs -text
+
+# Label / mask volumes (NEVER commit raw T1 — face-reconstructable; deface first)
+*.nii.gz filter=lfs diff=lfs merge=lfs -text
+
+# Compressed arrays
+*.npz   filter=lfs diff=lfs merge=lfs -text
+
+# Animations & full-res renders (small thumbnails stay in plain git)
+*.gif   filter=lfs diff=lfs merge=lfs -text
+*.mp4   filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text

@@ -19,6 +19,35 @@ Turn your own brain MRI into 3D models you can spin around (or 3D-print) in
 
 Try it on the sample in `example_data/` before using your own scan.
 
+## ✨ New: code-driven rendering toolkit + marketplace
+
+Beyond `.stl` export, the repo now ships an **adaptive, composable rendering
+toolkit** ([`rendering/`](rendering/README.md)) — turn a brain into glass art,
+sea-urchin pin fields, underwater anemones, DTI tractography, looping animations
+(turntable, inertial fur whip, dog-shake), reports, and printable models.
+
+```python
+from rendering.mesh_prep import label_to_mesh, center_to_origin
+from rendering.presets import glass_frosted
+from rendering.scene import render_scene
+shell = label_to_mesh("example_data/aparc+aseg.nii.gz", list(range(1000,3000)), envelope=True)
+(shell,) = center_to_origin(shell)
+render_scene(glass_frosted(shell), "out.png", preview=True)   # fast EEVEE preview
+```
+
+A render = **Form × Material × Light × Camera** (+ optional Surface texture &
+animation). See the [rendering README](rendering/README.md).
+
+**Marketplace** — anyone can add their own brain figurine, animation, report, or
+printable model under [`contributions/`](contributions/) (categories: reports ·
+anatomical-models · 3d-art · anime · universes). Browse the
+[gallery](gallery/README.md); contribute via [CONTRIBUTING.md](CONTRIBUTING.md).
+
+```bash
+pip install -r requirements.txt          # core toolkit
+pip install bpy dipy                      # optional: Cycles renders + DTI tracts
+```
+
 ## Repository layout
 
 | Folder | What's in it |

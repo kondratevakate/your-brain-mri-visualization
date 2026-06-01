@@ -5,5 +5,12 @@ __pycache__/
 *_bin.nii
 subcortical_tmp.nii.gz
 
-# Mesh binaries live in GitHub Releases, not git:
-*.stl
+# Scratch working dir (regenerable models) — not part of the repo:
+my-brain-models/
+
+# Scratch renders & intermediate frames (regenerable via examples/).
+# Curated artifacts live under contributions/ and ARE tracked (via LFS).
+rendering/output/
+
+# Note: contribution assets (*.stl, *.trk, *.nii.gz, *.gif) are tracked via
+# Git LFS (.gitattributes), NOT ignored.

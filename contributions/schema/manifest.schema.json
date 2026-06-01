@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brain figurine / animation contribution manifest",
+  "type": "object",
+  "required": ["title", "author", "type", "entry", "preview", "license"],
+  "properties": {
+    "title": { "type": "string", "minLength": 3 },
+    "author": { "type": "string", "description": "GitHub handle or name" },
+    "contact": { "type": "string", "description": "optional email/url" },
+    "type": { "enum": ["figure", "animation", "report", "model", "universe"] },
+    "engine": { "enum": ["cycles", "eevee", "matplotlib", "html", "none"], "default": "cycles" },
+    "entry": { "type": "string", "description": "build script, e.g. build.py" },
+    "output": { "type": "string", "description": "produced render filename" },
+    "preview": { "type": "string", "description": "thumbnail image (<512px)" },
+    "data": {
+      "type": "object",
+      "properties": {
+        "brain": { "type": ["string", "null"] },
+        "tracts": { "type": ["string", "null"] }
+      }
+    },
+    "style": {
+      "type": "object",
+      "properties": {
+        "preset": { "type": ["string", "null"] },
+        "params": { "type": "object" }
+      }
+    },
+    "license": { "type": "string", "description": "e.g. CC-BY-4.0" },
+    "created": { "type": "string" }
+  }
+}

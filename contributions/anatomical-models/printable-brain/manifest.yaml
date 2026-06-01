@@ -1,0 +1,17 @@
+title: "Printable Brain (STL)"
+author: "kondratevakate"
+type: model
+engine: none
+entry: build.py
+output: brain.stl
+preview: thumbnail.png
+data:
+  brain: example_data/aparc+aseg.nii.gz
+  tracts: null
+style:
+  preset: null
+  params:
+    target_faces: 120000
+    envelope: true
+license: CC-BY-4.0
+created: "2026-06-01"

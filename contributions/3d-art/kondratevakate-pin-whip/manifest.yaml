@@ -1,0 +1,19 @@
+title: "Pin-Whip Brain (animation)"
+author: "kondratevakate"
+type: animation
+engine: cycles
+entry: build.py
+output: pin_whip.gif
+preview: thumbnail.png
+data:
+  brain: example_data/aparc+aseg.nii.gz
+  tracts: null
+style:
+  preset: pin_brain
+  params:
+    total_deg: 18
+    whip_deg: 48
+    zeta: 0.08
+    n_frames: 44
+license: CC-BY-4.0
+created: "2026-06-01"

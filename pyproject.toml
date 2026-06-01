@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "your-brain-mri-visualization"
+version = "0.1.0"
+description = "Turn a brain MRI into stylised 3D renders, animations, reports and printable models — an adaptive, composable rendering toolkit + community marketplace."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ekaterina Kondrateva" }]
+keywords = ["neuroimaging", "brain", "MRI", "blender", "cycles", "3d", "render",
+            "tractography", "freesurfer", "synthseg", "stl", "3d-printing"]
+
+dependencies = [
+    "numpy", "scipy", "scikit-image", "nibabel", "trimesh",
+    "fast-simplification", "rtree", "matplotlib", "imageio", "pyyaml",
+]
+
+[project.optional-dependencies]
+render = ["bpy"]      # headless Blender / Cycles
+tracts = ["dipy"]     # public DTI bundles
+
+[project.urls]
+Homepage = "https://github.com/kondratevakate/your-brain-mri-visualization"
+
+[tool.setuptools]
+packages = ["rendering", "rendering.forms"]

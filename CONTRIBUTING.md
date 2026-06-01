@@ -44,3 +44,45 @@ example_data/      a canonical FreeSurfer output to try the pipeline on
 gallery/           rendered example image(s)
 ```
 Mesh binaries (`.stl`) live in GitHub Releases, not in git.
+
+---
+
+## Marketplace: contribute a brain figurine or animation
+
+Beyond tooling, this repo is a **gallery of brain renders**. Anyone can add their
+own figurine or animation as a self-contained folder under `contributions/`.
+
+### Quick start
+1. **Fork & clone**, then `git lfs install` (large assets use Git LFS).
+2. **Copy the template:**
+   ```bash
+   cp -r contributions/_TEMPLATE contributions/<yourhandle>-<short-name>
+   ```
+3. **Edit `manifest.yaml`** — title, author, type, preset/params, license.
+4. **Write `build.py`** using the public API (`rendering.presets`,
+   `rendering.scene`, `rendering.forms.*`). It must produce your `output` and a
+   small `preview` (use `render_scene(..., preview=True)` for a fast EEVEE thumb).
+5. **Render:** `python -m contributions.<yourhandle>-<short-name>.build`
+6. **Validate & refresh gallery:**
+   ```bash
+   python scripts/validate_contributions.py
+   python scripts/build_gallery.py
+   ```
+7. **Open a PR.** CI re-runs validation; a maintainer merges.
+
+### The building blocks (compose freely)
+| Axis | Where | Examples |
+|---|---|---|
+| Form | `mesh_prep`, `forms/quills`, `forms/tentacles` | envelope, pins, tentacles |
+| Material | `scene.Material` | glass, sss, stone, emission, tract |
+| Surface | `scene.Surface` | WOOD / STUCCI / VORONOI displacement |
+| Light | `scene.LightRig` | studio, reef, dramatic, underwater |
+| Camera | `scene.CameraRig` | angle, depth-of-field |
+| Animation | `animate` | turntable + whip physics → GIF |
+| Presets | `presets` | glass_clear, pin_brain, dti, anemone, atlas |
+
+### Bring your own brain
+Drop your parcellation at `data/brains/<handle>/aparc+aseg.nii.gz` (LFS) and point
+`manifest.data.brain` at it. HCP-style tracts: `python scripts/fetch_data.py
+--tracts` → reference `data/tracts/hcp/*.trk`. Each render auto-writes a sidecar
+`.json` for reproducibility. **Never commit a raw T1** (see `data/README.md`).

@@ -1,0 +1,18 @@
+# Copy this folder to contributions/<yourhandle>-<short-name>/ and edit.
+title: "My Glass Brain"
+author: "yourhandle"
+contact: ""                     # optional
+type: figure                    # figure | animation
+engine: cycles                  # cycles | eevee | matplotlib
+entry: build.py                 # script that produces `output`
+output: my_glass_brain.png
+preview: thumbnail.png          # small (<512px) image shown in the gallery
+data:
+  brain: example_data/aparc+aseg.nii.gz   # path or null
+  tracts: null
+style:
+  preset: glass_frosted         # a name from rendering/presets.py, or null
+  params:
+    samples: 128
+license: CC-BY-4.0
+created: "2026-06-01"

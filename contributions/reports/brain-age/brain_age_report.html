@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- Brain-age report template. Tokens %%LIKE_THIS%% are filled by build.py. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --ink:#1f3d1f; --bar:#26431f; --pink:#e91e63; --muted:#6b7280; }
+  * { box-sizing:border-box; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  body { margin:0; background:#eef2fb; padding:40px; }
+  .card { max-width:1180px; margin:0 auto; background:#fff; border-radius:22px;
+          padding:36px 44px; box-shadow:0 10px 40px rgba(20,30,60,.08); }
+  .top { display:flex; align-items:center; justify-content:space-between;
+         border-bottom:1px solid #e7eaf0; padding-bottom:18px; }
+  .top h1 { font-size:26px; margin:0; color:#0f172a; }
+  .badge { background:#e8eefb; color:#3b4a66; font-weight:600; font-size:13px;
+           padding:8px 14px; border-radius:10px; letter-spacing:.04em; }
+  .body { display:flex; gap:30px; margin-top:26px; }
+  .left { width:300px; flex:none; text-align:center; }
+  .left img { width:260px; }
+  .summary { font-size:22px; line-height:1.5; color:#0f172a; }
+  .summary b { color:var(--ink); }
+  .rec { border:1px solid #e3e7ee; border-radius:14px; padding:18px 20px; margin-top:22px; }
+  .rec h3 { margin:0 0 6px; font-size:16px; color:#374151; font-weight:600; }
+  .rec p { margin:0; color:#4b5563; }
+  .metrics { display:flex; gap:30px; margin-top:30px; align-items:center; }
+  .bars { flex:1; }
+  .row { margin:14px 0; }
+  .row .lbl { font-size:18px; color:#111827; margin-bottom:6px; }
+  .track { display:flex; align-items:center; gap:12px; }
+  .fill { height:26px; border-radius:6px; background:var(--bar); }
+  .fill.pink { background:var(--pink); }
+  .val { font-weight:700; font-size:18px; color:#111827; }
+  .score { font-size:18px; color:#1f2937; text-align:center; padding-left:10px;
+           border-left:2px solid #cbd5e1; }
+  .score .big { font-size:84px; font-weight:800; color:var(--ink); line-height:.9; }
+  .score sup { font-size:26px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <h1>⟲ The age of your brain</h1>
+      <div class="badge">100% COMPLETE</div>
+    </div>
+    <div class="body">
+      <div class="left"><img src="thumbnail_brain.png" alt="brain"></div>
+      <div style="flex:1">
+        <div class="summary">Your biological brain age is
+          <b>11.0 years younger</b> than your chronological age
+          based on your results.</div>
+        <div class="rec">
+          <h3>🩺 Recommendations</h3>
+          <p>We've put together a few recommendations to help you improve your brain function &rsaquo;</p>
+        </div>
+        <div class="metrics">
+          <div class="bars">
+            <div class="row"><div class="lbl">NeuroGames Results</div>
+              <div class="track"><div class="fill" style="width:58%"></div><span class="val">40.6</span></div></div>
+            <div class="row"><div class="lbl">Blood Biomarkers</div>
+              <div class="track"><div class="fill" style="width:67%"></div><span class="val">47.0</span></div></div>
+            <div class="row"><div class="lbl">Brain MRI</div>
+              <div class="track"><div class="fill" style="width:81%"></div><span class="val">57.0</span></div></div>
+            <div class="row"><div class="lbl">Genetic Resilience</div>
+              <div class="track"><div class="fill pink" style="width:17%"></div><span class="val">17.0%</span></div></div>
+          </div>
+          <div class="score">
+            <div class="big">51<sup>.46</sup></div>
+            <div>years</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

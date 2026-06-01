@@ -1,0 +1,17 @@
+# Core rendering toolkit (matplotlib styles, mesh prep, animation assembly)
+numpy
+scipy
+scikit-image
+nibabel
+trimesh
+fast-simplification
+rtree
+matplotlib
+imageio
+pyyaml
+
+# --- optional extras --------------------------------------------------------
+# Photoreal Cycles renders (glass / SSS / pins / tracts):
+#   pip install bpy        # ~500 MB, headless Blender
+# Public DTI tractography fetch:
+#   pip install dipy

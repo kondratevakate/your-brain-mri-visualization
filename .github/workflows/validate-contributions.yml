@@ -1,0 +1,25 @@
+name: validate-contributions
+
+# Lightweight gate: validates manifests on PRs. No Blender / no rendering in CI
+# (renders are heavy); contributors render locally and commit the preview.
+
+on:
+  pull_request:
+    paths:
+      - "contributions/**"
+  push:
+    paths:
+      - "contributions/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal deps
+        run: pip install pyyaml
+      - name: Validate contribution manifests
+        run: python scripts/validate_contributions.py

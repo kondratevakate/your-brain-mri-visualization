@@ -1,0 +1,21 @@
+title: "Radial Pin Brain"
+author: "kondratevakate"
+contact: ""
+type: figure
+engine: cycles
+entry: build.py
+output: pin_brain.png
+preview: thumbnail.png
+data:
+  brain: example_data/aparc+aseg.nii.gz
+  tracts: null
+style:
+  preset: pin_brain
+  params:
+    n_rows: 46
+    pins_per_row: 160
+    jitter: 0.35
+    base_radius: 1.13
+    length: 14.0
+license: CC-BY-4.0
+created: "2026-06-01"

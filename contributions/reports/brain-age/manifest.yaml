@@ -1,0 +1,16 @@
+title: "Brain-Age Report"
+author: "kondratevakate"
+type: report
+engine: html
+entry: build.py
+output: brain_age_report.html
+preview: thumbnail.png
+data:
+  brain: example_data/aparc+aseg.nii.gz
+  tracts: null
+style:
+  preset: null
+  params:
+    template: template.html
+license: CC-BY-4.0
+created: "2026-06-01"
